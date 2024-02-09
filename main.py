@@ -15,7 +15,7 @@ acceptedPuzzles = ["Matchbox", "Light Motif", "Sightseer", "Sentinel Stones", "H
 
 # Times are UTC - 6
 puzzleTimes = {
-    "Verdant Glen Matchbox": "7:39",
+    "Verdant Glen Matchbox": "7:29",
     "Verdant Glen Light Motif": "20:18",
     "Verdant Glen Sightseer": "16:25",
     "Verdant Glen Sentinel Stones": "20:06",
@@ -26,7 +26,7 @@ puzzleTimes = {
     "Verdant Glen Logic Grid": "5:17",
     "Verdant Glen Memory Grid": "13:34",
     "Verdant Glen Pattern Grid": "10:12",
-    "Verdant Glen Wandering Echo": "12:15",
+    "Verdant Glen Wandering Echo": "12:05",
     "Verdant Glen Glide Rings": "5:52",
     "Verdant Glen Flow Orbs": "23:32",
     "Verdant Glen Crystal Labyrinth": "5:28",
