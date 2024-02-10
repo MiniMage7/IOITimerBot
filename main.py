@@ -181,6 +181,10 @@ async def create_embed_timer(ctx, area):
         except KeyError:
             pass
 
+    # Fix weird spacing
+    if area == "Lucent Waters":
+        embedVar.add_field(name="", value="", inline=True)
+
     embeddedMessage = await ctx.channel.send(embed=embedVar)
 
     embedMessageIds[area + " Channel"] = ctx.channel.id
