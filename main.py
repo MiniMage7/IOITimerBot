@@ -79,6 +79,22 @@ puzzleTimes = {
     "Shady Wildwood FLow Orbs": "6:17",
     "Shady Wildwood Glide Rings": "12:36",
     "Shady Wildwood Crystal Labyrinths": "12:11",
+
+    "Serene Deluge Light Motifs": "18:55",
+    "Serene Deluge Matchboxes": "6:17",
+    "Serene Deluge Sightseers": "15:03",
+    "Serene Deluge Sentinel Stones": "18:43",
+    "Serene Deluge Hidden Pentads": "11:50",
+    "Serene Deluge Hidden Cubes": "19:30",
+    "Serene Deluge Hidden Rings": "8:24",
+    "Serene Deluge Hidden Archways": "5:59",
+    "Serene Deluge Logic Grids": "3:54",
+    "Serene Deluge Memory Grids": "12:12",
+    "Serene Deluge Pattern Grids": "8:50",
+    "Serene Deluge Flow Orbs": "22:10",
+    "Serene Deluge Glide Rings": "4:30",
+    "Serene Deluge Wandering Echos": "10:43",
+    "Serene Deluge Crystal Labyrinths": "4:05"
 }
 
 with open("channels.json", "r") as read_file:
