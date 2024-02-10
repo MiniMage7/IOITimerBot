@@ -44,10 +44,26 @@ channelIds = {
     "Serene Deluge": channelsJSON["Serene Deluge"]
 }
 
+with open("embedMessages.json", "r") as read_file:
+    embedMessages = json.load(read_file)
 
-@bot.check
-async def globally_block_non_IOI(ctx):  # Second one is for testing
-    return ctx.guild.id == 1193697387827437598 or ctx.guild.id == 1205261316818731029
+embedMessageIds = {
+    "Verdant Glen Channel": embedMessages["Verdant Glen Channel"],
+    "Verdant Glen": embedMessages["Verdant Glen"],
+    "Lucent Waters Channel": embedMessages["Lucent Waters Channel"],
+    "Lucent Waters": embedMessages["Lucent Waters"],
+    "Autumn Falls Channel": embedMessages["Autumn Falls Channel"],
+    "Autumn Falls": embedMessages["Autumn Falls"],
+    "Shady Wildwood Channel": embedMessages["Shady Wildwood Channel"],
+    "Shady Wildwood": embedMessages["Shady Wildwood"],
+    "Serene Deluge Channel": embedMessages["Serene Deluge Channel"],
+    "Serene Deluge": embedMessages["Serene Deluge"]
+}
+
+
+# @bot.check
+# async def globally_block_non_IOI(ctx):  # Second one is for testing
+#     return ctx.guild.id == 1193697387827437598 or ctx.guild.id == 1205261316818731029
 
 
 async def isAdmin(ctx):
@@ -94,32 +110,45 @@ async def create_embed_timer(ctx, area):
         try:
             seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
                        - currentTime).seconds
-            hours = seconds // 3600
-            minutes = (seconds % 3600) // 60
 
-            timeString = ""
-
-            if hours != 0:
-                timeString += "{:d} hour".format(hours)
-                if hours != 1:
-                    timeString += "s"
-
-                if minutes != 0:
-                    timeString += " and "
-
-            if minutes != 0:
-                timeString += "{:d} minute".format(minutes)
-                if minutes != 1:
-                    timeString += "s"
-
-            if timeString == "":
-                timeString = "Refreshing Now!"
+            timeString = convertSecondsToString(seconds)
 
             embedVar.add_field(name=puzzle, value=timeString, inline=True)
         except KeyError:
             pass
 
-    await ctx.channel.send(embed=embedVar)
+    embeddedMessage = await ctx.channel.send(embed=embedVar)
+
+    embedMessageIds[area + " Channel"] = ctx.channel.id
+    embedMessageIds[area] = embeddedMessage.id
+
+    with open("embedMessages.json", "w") as write_file:
+        json.dump(embedMessageIds, write_file)
+
+
+def convertSecondsToString(seconds):
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+
+    timeString = ""
+
+    if hours != 0:
+        timeString += "{:d} hour".format(hours)
+        if hours != 1:
+            timeString += "s"
+
+        if minutes != 0:
+            timeString += " and "
+
+    if minutes != 0:
+        timeString += "{:d} minute".format(minutes)
+        if minutes != 1:
+            timeString += "s"
+
+    if timeString == "":
+        timeString = "Refreshing Now!"
+
+    return timeString
 
 
 @tasks.loop(seconds=60.0)
@@ -138,6 +167,36 @@ async def checkTime():
                 pass
 
     # Update each embedded message
+    await updateEmbeds()
+
+
+async def updateEmbeds():
+    currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
+
+    for area in acceptedAreas:
+        if embedMessageIds[area] == 0:
+            continue
+
+        channel = bot.get_channel(embedMessageIds[area + " Channel"])
+        message = await channel.fetch_message(embedMessageIds[area])
+        embed = message.embeds[0]
+
+        index = 0
+
+        for puzzle in acceptedPuzzles:
+            try:
+                seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
+                           - currentTime).seconds
+
+                timeString = convertSecondsToString(seconds)
+
+                embed.set_field_at(index=index, name=puzzle, value=timeString, inline=True)
+
+                index += 1
+            except KeyError:
+                pass
+
+        await message.edit(embed=embed)
 
 
 @bot.event
