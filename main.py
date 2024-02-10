@@ -214,22 +214,9 @@ def convertSecondsToString(seconds):
     hours = seconds // 3600
     minutes = (seconds % 3600) // 60
 
-    timeString = ""
+    timeString = "{:d}h {:d}m".format(hours, minutes)
 
-    if hours != 0:
-        timeString += "{:d} hour".format(hours)
-        if hours != 1:
-            timeString += "s"
-
-        if minutes != 0:
-            timeString += " and "
-
-    if minutes != 0:
-        timeString += "{:d} minute".format(minutes)
-        if minutes != 1:
-            timeString += "s"
-
-    if timeString == "":
+    if hours == 0 and minutes == 0:
         timeString = "Refreshing Now!"
 
     return timeString
