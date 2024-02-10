@@ -15,22 +15,22 @@ acceptedPuzzles = ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones"
 
 # Times are UTC - 6
 puzzleTimes = {
-    "Verdant Glen Matchboxes": "7:29",
+    "Verdant Glen Matchboxes": "7:30",
     "Verdant Glen Light Motifs": "20:18",
-    "Verdant Glen Sightseers": "16:25",
-    "Verdant Glen Sentinel Stones": "20:06",
-    "Verdant Glen Hidden Rings": "9:47",
-    "Verdant Glen Hidden Cubes": "20:52",
-    "Verdant Glen Hidden Archways": "7:20",
-    "Verdant Glen Hidden Pentads": "13:12",
-    "Verdant Glen Logic Grids": "5:17",
-    "Verdant Glen Memory Grids": "13:34",
-    "Verdant Glen Pattern Grids": "10:12",
-    "Verdant Glen Wandering Echos": "12:05",
-    "Verdant Glen Glide Rings": "5:52",
-    "Verdant Glen Flow Orbs": "23:32",
+    "Verdant Glen Sightseers": "16:26",
+    "Verdant Glen Sentinel Stones": "20:07",
+    "Verdant Glen Hidden Rings": "9:48",
+    "Verdant Glen Hidden Cubes": "20:53",
+    "Verdant Glen Hidden Archways": "7:22",
+    "Verdant Glen Hidden Pentads": "13:13",
+    "Verdant Glen Logic Grids": "5:18",
+    "Verdant Glen Memory Grids": "13:35",
+    "Verdant Glen Pattern Grids": "10:13",
+    "Verdant Glen Wandering Echos": "12:06",
+    "Verdant Glen Glide Rings": "5:53",
+    "Verdant Glen Flow Orbs": "23:33",
     "Verdant Glen Crystal Labyrinths": "5:28",
-    "Verdant Glen Morphic Fractals": "9:55"
+    "Verdant Glen Morphic Fractals": "9:56"
 }
 
 with open("channels.json", "r") as read_file:
@@ -57,14 +57,42 @@ async def isAdmin(ctx):
 @bot.hybrid_command()
 @commands.check(isAdmin)
 async def set_verdant_glen(ctx):
+    await create_embed_timer(ctx, "Verdant Glen")
+
+
+@bot.hybrid_command()
+@commands.check(isAdmin)
+async def set_lucent_waters(ctx):
+    await create_embed_timer(ctx, "Lucent Waters")
+
+
+@bot.hybrid_command()
+@commands.check(isAdmin)
+async def set_autumn_falls(ctx):
+    await create_embed_timer(ctx, "Autumn Falls")
+
+
+@bot.hybrid_command()
+@commands.check(isAdmin)
+async def set_shady_wildwood(ctx):
+    await create_embed_timer(ctx, "Shady Wildwood")
+
+
+@bot.hybrid_command()
+@commands.check(isAdmin)
+async def set_serene_deluge(ctx):
+    await create_embed_timer(ctx, "Serene Deluge")
+
+
+async def create_embed_timer(ctx, area):
     await ctx.message.delete()
 
-    embedVar = discord.Embed(title="Verdant Glen Timers", color=0x336EFF)
+    embedVar = discord.Embed(title=area + " Timers", color=0x336EFF)
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
 
     for puzzle in acceptedPuzzles:
         try:
-            seconds = (datetime.datetime.strptime(puzzleTimes["Verdant Glen " + puzzle], '%H:%M')
+            seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
                        - currentTime).seconds
             hours = seconds // 3600
             minutes = (seconds % 3600) // 60
@@ -108,6 +136,8 @@ async def checkTime():
                     await botChannel.send(currentPuzzle + " have refreshed!")
             except KeyError:
                 pass
+
+    # Update each embedded message
 
 
 @bot.event
