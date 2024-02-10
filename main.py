@@ -8,10 +8,29 @@ intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='$', intents=intents)
 
-acceptedAreas = ["Verdant Glen", "Lucent Waters", "Autumn Falls", "Shady Wildwood", "Serene Deluge"]
-acceptedPuzzles = ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones", "Hidden Rings", "Hidden Cubes",
-                   "Hidden Archways", "Hidden Pentads", "Logic Grids", "Memory Grids", "Pattern Grids",
-                   "Wandering Echos", "Glide Rings", "Flow Orbs", "Crystal Labyrinths", "Morphic Fractals"]
+puzzleAreas = ["Verdant Glen", "Lucent Waters", "Autumn Falls", "Shady Wildwood", "Serene Deluge"]
+
+acceptedPuzzles = {
+    "Verdant Glen": ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones", "Hidden Rings", "Hidden Cubes",
+                     "Hidden Archways", "Hidden Pentads", "Logic Grids", "Memory Grids", "Pattern Grids",
+                     "Wandering Echos", "Glide Rings", "Flow Orbs", "Crystal Labyrinths", "Morphic Fractals"],
+
+    "Lucent Waters": ["Sightseers", "Matchboxes", "Light Motifs", "Hidden Cubes", "Hidden Archways", "Hidden Rings",
+                      "Hidden Pentads", "Logic Grids", "Pattern Grids", "Memory Grids",
+                      "Wandering Echos", "Glide Rings", "Flow Orbs", "Morphic Fractals"],
+
+    "Autumn Falls": ["Matchboxes", "Sightseers", "Light Motifs", "Sentinel Stones", "Hidden Cubes", "Hidden Archways",
+                     "Hidden Rings", "Hidden Pentads", "Logic Grids", "Memory Grids", "Pattern Grids",
+                     "Flow Orbs", "Wandering Echos", "Glide Rings", "Morphic Fractals", "Crystal Labyrinths"],
+
+    "Shady Wildwood": ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones", "Hidden Cubes",  "Hidden Rings",
+                       "Hidden Pentads", "Hidden Archways", "Logic Grids", "Memory Grids", "Pattern Grids",
+                       "Wandering Echos", "Flow Orbs", "Glide Rings", "Crystal Labyrinths"],
+
+    "Serene Deluge": ["Light Motifs", "Matchboxes", "Sightseers", "Sentinel Stones", "Hidden Pentads", "Hidden Cubes",
+                      "Hidden Rings", "Hidden Archways", "Logic Grids", "Memory Grids", "Pattern Grids",
+                      "Flow Orbs", "Glide Rings", "Wandering Echos", "Crystal Labyrinths"]
+}
 
 # Times are UTC - 6
 puzzleTimes = {
@@ -170,16 +189,13 @@ async def create_embed_timer(ctx, area):
     embedVar = discord.Embed(title=area + " Timers", color=0x336EFF)
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
 
-    for puzzle in acceptedPuzzles:
-        try:
-            seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
-                       - currentTime).seconds
+    for puzzle in acceptedPuzzles[area]:
+        seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
+                   - currentTime).seconds
 
-            timeString = convertSecondsToString(seconds)
+        timeString = convertSecondsToString(seconds)
 
-            embedVar.add_field(name=puzzle, value=timeString, inline=True)
-        except KeyError:
-            pass
+        embedVar.add_field(name=puzzle, value=timeString, inline=True)
 
     # Fix weird spacing
     if area == "Lucent Waters":
@@ -224,15 +240,12 @@ async def checkTime():
     # Send messages for each ready puzzle
     time = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
     timeString = "{:d}:{:02d}".format(time.hour, time.minute)
-    for area in acceptedAreas:
-        for puzzle in acceptedPuzzles:
-            try:
-                currentPuzzle = area + " " + puzzle
-                if puzzleTimes[currentPuzzle] == timeString:
-                    botChannel = bot.get_channel(channelIds[area])
-                    await botChannel.send(currentPuzzle + " have refreshed!")
-            except KeyError:
-                pass
+    for area in puzzleAreas:
+        for puzzle in acceptedPuzzles[area]:
+            currentPuzzle = area + " " + puzzle
+            if puzzleTimes[currentPuzzle] == timeString:
+                botChannel = bot.get_channel(channelIds[area])
+                await botChannel.send(currentPuzzle + " have refreshed!")
 
     # Update each embedded message
     await updateEmbeds()
@@ -241,7 +254,7 @@ async def checkTime():
 async def updateEmbeds():
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
 
-    for area in acceptedAreas:
+    for area in puzzleAreas:
         if embedMessageIds[area] == 0:
             continue
 
@@ -251,18 +264,15 @@ async def updateEmbeds():
 
         index = 0
 
-        for puzzle in acceptedPuzzles:
-            try:
-                seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
-                           - currentTime).seconds
+        for puzzle in acceptedPuzzles[area]:
+            seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
+                       - currentTime).seconds
 
-                timeString = convertSecondsToString(seconds)
+            timeString = convertSecondsToString(seconds)
 
-                embed.set_field_at(index=index, name=puzzle, value=timeString, inline=True)
+            embed.set_field_at(index=index, name=puzzle, value=timeString, inline=True)
 
-                index += 1
-            except KeyError:
-                pass
+            index += 1
 
         await message.edit(embed=embed)
 
@@ -270,5 +280,6 @@ async def updateEmbeds():
 @bot.event
 async def on_ready():
     checkTime.start()
+
 
 bot.run(os.environ['TOKEN'])
