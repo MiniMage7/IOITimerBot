@@ -33,37 +33,25 @@ puzzleTimes = {
     "Verdant Glen Morphic Fractal": "9:55"
 }
 
-with open("channel.json", "r") as read_file:
-    channelJSON = json.load(read_file)
-channelID = channelJSON["channel"]
-botChannel = bot.get_channel(channelID)  # This won't work but gets rid of annoying warnings
+with open("channels.json", "r") as read_file:
+    channelsJSON = json.load(read_file)
+
+channelIds = {
+    "Verdant Glen": channelsJSON["Verdant Glen"],
+    "Lucent Waters": channelsJSON["Lucent Waters"],
+    "Autumn Falls": channelsJSON["Autumn Falls"],
+    "Shady Wildwood": channelsJSON["Shady Wildwood"],
+    "Serene Deluge": channelsJSON["Serene Deluge"]
+}
 
 
 @bot.check
-async def globally_block_non_IOI(ctx):
-    return ctx.guild.id == int(os.environ['GUILD_ID'])
+async def globally_block_non_IOI(ctx):  # Second one is for testing
+    return ctx.guild.id == 1193697387827437598 or ctx.guild.id == 1205261316818731029
 
 
-async def isEpic(ctx):
-    return ctx.author.id == int(os.environ['EPIC'])
-
-
-@bot.hybrid_command()
-@commands.check(isEpic)
-async def set_bot_channel(ctx):
-    await ctx.message.delete()
-    await ctx.send("This is my home now!")
-
-    global channelID, botChannel
-    channelID = ctx.channel.id
-    botChannel = ctx.channel
-
-    data = {
-        "channel": channelID
-    }
-
-    with open("channel.json", "w") as write_file:
-        json.dump(data, write_file)
+async def isAdmin(ctx):
+    return ctx.author.id == 461268548229136395 or await bot.is_owner(ctx.author)
 
 
 @tasks.loop(seconds=60.0)
@@ -75,7 +63,7 @@ async def checkTime():
             try:
                 currentPuzzle = area + " " + puzzle
                 if puzzleTimes[currentPuzzle] == timeString:
-                    global botChannel
+                    botChannel = bot.get_channel(channelIds[area])
                     await botChannel.send(currentPuzzle + " have refreshed!")
             except KeyError:
                 pass
@@ -84,7 +72,5 @@ async def checkTime():
 @bot.event
 async def on_ready():
     checkTime.start()
-    global botChannel
-    botChannel = bot.get_channel(channelID)
 
 bot.run(os.environ['TOKEN'])
