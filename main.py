@@ -30,7 +30,22 @@ puzzleTimes = {
     "Verdant Glen Glide Rings": "5:53",
     "Verdant Glen Flow Orbs": "23:33",
     "Verdant Glen Crystal Labyrinths": "5:28",
-    "Verdant Glen Morphic Fractals": "9:56"
+    "Verdant Glen Morphic Fractals": "9:56",
+
+    "Lucent Waters Sightseers": "6:44",
+    "Lucent Waters Matchboxes": "21:48",
+    "Lucent Waters Light Motifs": "10:37",
+    "Lucent Waters Hidden Cubes": "11:12",
+    "Lucent Waters Hidden Archways": "21:40",
+    "Lucent Waters Hidden Rings": "0:06",
+    "Lucent Waters Hidden Pentads": "3:32",
+    "Lucent Waters Logic Grids": "19:36",
+    "Lucent Waters Pattern Grids": "0:31",
+    "Lucent Waters Memory Grids": "3:53",
+    "Lucent Waters Wandering Echos": "2:24",
+    "Lucent Waters Glide Rings": "20:12",
+    "Lucent Waters Flow Orbs": "13:52",
+    "Lucent Waters Morphic Fractals": "0:15"
 }
 
 with open("channels.json", "r") as read_file:
