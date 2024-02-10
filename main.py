@@ -63,6 +63,22 @@ puzzleTimes = {
     "Autumn Falls Glide Rings": "11:00",
     "Autumn Falls Morphic Fractals": "15:03",
     "Autumn Falls Crystal Labyrinths": "10:35",
+
+    "Shady Wildwood Matchboxes": "14:13",
+    "Shady Wildwood Light Motifs": "3:02",
+    "Shady Wildwood Sightseers": "23:09",
+    "Shady Wildwood Sentinel Stones": "2:50",
+    "Shady Wildwood Hidden Cubes": "3:36",
+    "Shady Wildwood Hidden Rings": "16:31",
+    "Shady Wildwood Hidden Pentads": "19:56",
+    "Shady Wildwood Hidden Archways": "14:05",
+    "Shady Wildwood Logic Grids": "12:01",
+    "Shady Wildwood Memory Grids": "20:18",
+    "Shady Wildwood Pattern Grids": "16:56",
+    "Shady Wildwood Wandering Echos": "18:49",
+    "Shady Wildwood FLow Orbs": "6:17",
+    "Shady Wildwood Glide Rings": "12:36",
+    "Shady Wildwood Crystal Labyrinths": "12:11",
 }
 
 with open("channels.json", "r") as read_file:
@@ -93,9 +109,9 @@ embedMessageIds = {
 }
 
 
-# @bot.check
-# async def globally_block_non_IOI(ctx):  # Second one is for testing
-#     return ctx.guild.id == 1193697387827437598 or ctx.guild.id == 1205261316818731029
+@bot.check
+async def globally_block_non_IOI(ctx):  # Second one is for testing
+    return ctx.guild.id == 1193697387827437598 or ctx.guild.id == 1205261316818731029
 
 
 async def isAdmin(ctx):
