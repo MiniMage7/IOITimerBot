@@ -45,7 +45,24 @@ puzzleTimes = {
     "Lucent Waters Wandering Echos": "2:24",
     "Lucent Waters Glide Rings": "20:12",
     "Lucent Waters Flow Orbs": "13:52",
-    "Lucent Waters Morphic Fractals": "0:15"
+    "Lucent Waters Morphic Fractals": "0:15",
+
+    "Autumn Falls Matchboxes": "12:37",
+    "Autumn Falls Sightseers": "21:33",
+    "Autumn Falls Light Motifs": "1:25",
+    "Autumn Falls Sentinel Stones": "1:14",
+    "Autumn Falls Hidden Cubes": "2:00",
+    "Autumn Falls Hidden Archways": "12:29",
+    "Autumn Falls Hidden Rings": "14:55",
+    "Autumn Falls Hidden Pentads": "19:20",
+    "Autumn Falls Logic Grids": "10:25",
+    "Autumn Falls Memory Grids": "18:42",
+    "Autumn Falls Pattern Grids": "15:20",
+    "Autumn Falls Flow Orbs": "4:40",
+    "Autumn Falls Wandering Echos": "17:13",
+    "Autumn Falls Glide Rings": "11:00",
+    "Autumn Falls Morphic Fractals": "15:03",
+    "Autumn Falls Crystal Labyrinths": "10:35",
 }
 
 with open("channels.json", "r") as read_file:
