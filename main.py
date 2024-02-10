@@ -255,9 +255,6 @@ async def updateEmbeds():
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
 
     for area in puzzleAreas:
-        if embedMessageIds[area] == 0:
-            continue
-
         channel = bot.get_channel(embedMessageIds[area + " Channel"])
         message = await channel.fetch_message(embedMessageIds[area])
         embed = message.embeds[0]
