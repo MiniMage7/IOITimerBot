@@ -9,28 +9,28 @@ intents.message_content = True
 bot = commands.Bot(command_prefix='$', intents=intents)
 
 acceptedAreas = ["Verdant Glen", "Lucent Waters", "Autumn Falls", "Shady Wildwood", "Serene Deluge"]
-acceptedPuzzles = ["Matchbox", "Light Motif", "Sightseer", "Sentinel Stones", "Hidden Ring", "Hidden Cube",
-                   "Hidden Archway", "Hidden Pentad", "Logic Grid", "Memory Grid", "Pattern Grid", "Wandering Echo",
-                   "Glide Rings", "Flow Orbs", "Crystal Labyrinth", "Morphic Fractal"]
+acceptedPuzzles = ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones", "Hidden Rings", "Hidden Cubes",
+                   "Hidden Archways", "Hidden Pentads", "Logic Grids", "Memory Grids", "Pattern Grids",
+                   "Wandering Echos", "Glide Rings", "Flow Orbs", "Crystal Labyrinths", "Morphic Fractals"]
 
 # Times are UTC - 6
 puzzleTimes = {
-    "Verdant Glen Matchbox": "7:29",
-    "Verdant Glen Light Motif": "20:18",
-    "Verdant Glen Sightseer": "16:25",
+    "Verdant Glen Matchboxes": "7:29",
+    "Verdant Glen Light Motifs": "20:18",
+    "Verdant Glen Sightseers": "16:25",
     "Verdant Glen Sentinel Stones": "20:06",
-    "Verdant Glen Hidden Ring": "9:47",
-    "Verdant Glen Hidden Cube": "20:52",
-    "Verdant Glen Hidden Archway": "7:20",
-    "Verdant Glen Hidden Pentad": "13:12",
-    "Verdant Glen Logic Grid": "5:17",
-    "Verdant Glen Memory Grid": "13:34",
-    "Verdant Glen Pattern Grid": "10:12",
-    "Verdant Glen Wandering Echo": "12:05",
+    "Verdant Glen Hidden Rings": "9:47",
+    "Verdant Glen Hidden Cubes": "20:52",
+    "Verdant Glen Hidden Archways": "7:20",
+    "Verdant Glen Hidden Pentads": "13:12",
+    "Verdant Glen Logic Grids": "5:17",
+    "Verdant Glen Memory Grids": "13:34",
+    "Verdant Glen Pattern Grids": "10:12",
+    "Verdant Glen Wandering Echos": "12:05",
     "Verdant Glen Glide Rings": "5:52",
     "Verdant Glen Flow Orbs": "23:32",
-    "Verdant Glen Crystal Labyrinth": "5:28",
-    "Verdant Glen Morphic Fractal": "9:55"
+    "Verdant Glen Crystal Labyrinths": "5:28",
+    "Verdant Glen Morphic Fractals": "9:55"
 }
 
 with open("channels.json", "r") as read_file:
