@@ -54,8 +54,49 @@ async def isAdmin(ctx):
     return ctx.author.id == 461268548229136395 or await bot.is_owner(ctx.author)
 
 
+@bot.hybrid_command()
+@commands.check(isAdmin)
+async def set_verdant_glen(ctx):
+    await ctx.message.delete()
+
+    embedVar = discord.Embed(title="Verdant Glen Timers", color=0x336EFF)
+    currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
+
+    for puzzle in acceptedPuzzles:
+        try:
+            seconds = (datetime.datetime.strptime(puzzleTimes["Verdant Glen " + puzzle], '%H:%M')
+                       - currentTime).seconds
+            hours = seconds // 3600
+            minutes = (seconds % 3600) // 60
+
+            timeString = ""
+
+            if hours != 0:
+                timeString += "{:d} hour".format(hours)
+                if hours != 1:
+                    timeString += "s"
+
+                if minutes != 0:
+                    timeString += " and "
+
+            if minutes != 0:
+                timeString += "{:d} minute".format(minutes)
+                if minutes != 1:
+                    timeString += "s"
+
+            if timeString == "":
+                timeString = "Refreshing Now!"
+
+            embedVar.add_field(name=puzzle, value=timeString, inline=True)
+        except KeyError:
+            pass
+
+    await ctx.channel.send(embed=embedVar)
+
+
 @tasks.loop(seconds=60.0)
 async def checkTime():
+    # Send messages for each ready puzzle
     time = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
     timeString = "{:d}:{:02d}".format(time.hour, time.minute)
     for area in acceptedAreas:
