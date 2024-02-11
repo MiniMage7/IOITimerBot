@@ -117,31 +117,10 @@ puzzleTimes = {
 }
 
 with open("channels.json", "r") as read_file:
-    channelsJSON = json.load(read_file)
-
-channelIds = {
-    "Verdant Glen": channelsJSON["Verdant Glen"],
-    "Lucent Waters": channelsJSON["Lucent Waters"],
-    "Autumn Falls": channelsJSON["Autumn Falls"],
-    "Shady Wildwood": channelsJSON["Shady Wildwood"],
-    "Serene Deluge": channelsJSON["Serene Deluge"]
-}
+    channelIds = json.load(read_file)
 
 with open("embedMessages.json", "r") as read_file:
-    embedMessages = json.load(read_file)
-
-embedMessageIds = {
-    "Verdant Glen Channel": embedMessages["Verdant Glen Channel"],
-    "Verdant Glen": embedMessages["Verdant Glen"],
-    "Lucent Waters Channel": embedMessages["Lucent Waters Channel"],
-    "Lucent Waters": embedMessages["Lucent Waters"],
-    "Autumn Falls Channel": embedMessages["Autumn Falls Channel"],
-    "Autumn Falls": embedMessages["Autumn Falls"],
-    "Shady Wildwood Channel": embedMessages["Shady Wildwood Channel"],
-    "Shady Wildwood": embedMessages["Shady Wildwood"],
-    "Serene Deluge Channel": embedMessages["Serene Deluge Channel"],
-    "Serene Deluge": embedMessages["Serene Deluge"]
-}
+    embedMessageIds = json.load(read_file)
 
 with open("roles.json", "r") as read_file:
     roleIds = json.load(read_file)
