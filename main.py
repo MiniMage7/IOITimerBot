@@ -328,7 +328,13 @@ async def checkTime():
             currentPuzzle = area + " " + puzzle
             if puzzleTimes[currentPuzzle] == timeString:
                 botChannel = bot.get_channel(channelIds[area])
-                await botChannel.send(currentPuzzle + " have refreshed!")
+                # Check if there is anyone with the role to ping
+                try:
+                    roleId = roleIds[area + " " + puzzle]
+                    role = botChannel.guild.get_role(roleId)
+                    await botChannel.send(f"{currentPuzzle} have refreshed! {role.mention}")
+                except KeyError:
+                    await botChannel.send(currentPuzzle + " have refreshed!")
 
     # Update each embedded message
     await updateEmbeds()
