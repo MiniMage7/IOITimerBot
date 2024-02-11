@@ -143,6 +143,9 @@ embedMessageIds = {
     "Serene Deluge": embedMessages["Serene Deluge"]
 }
 
+with open("roles.json", "r") as read_file:
+    roleIds = json.load(read_file)
+
 
 @bot.check
 async def globally_block_non_IOI(ctx):  # Second one is for testing
@@ -153,31 +156,31 @@ async def isAdmin(ctx):
     return ctx.author.id == 461268548229136395 or await bot.is_owner(ctx.author)
 
 
-@bot.hybrid_command()
+@bot.command()
 @commands.check(isAdmin)
 async def set_verdant_glen(ctx):
     await create_embed_timer(ctx, "Verdant Glen")
 
 
-@bot.hybrid_command()
+@bot.command()
 @commands.check(isAdmin)
 async def set_lucent_waters(ctx):
     await create_embed_timer(ctx, "Lucent Waters")
 
 
-@bot.hybrid_command()
+@bot.command()
 @commands.check(isAdmin)
 async def set_autumn_falls(ctx):
     await create_embed_timer(ctx, "Autumn Falls")
 
 
-@bot.hybrid_command()
+@bot.command()
 @commands.check(isAdmin)
 async def set_shady_wildwood(ctx):
     await create_embed_timer(ctx, "Shady Wildwood")
 
 
-@bot.hybrid_command()
+@bot.command()
 @commands.check(isAdmin)
 async def set_serene_deluge(ctx):
     await create_embed_timer(ctx, "Serene Deluge")
@@ -220,6 +223,51 @@ def convertSecondsToString(seconds):
         timeString = "Refreshing Now!"
 
     return timeString
+
+
+@bot.command()
+async def add_role(ctx, *args):
+    if len(args) != 2:
+        await ctx.channel.send(f"{ctx.author.mention}\n"
+                               f"This command is used to add a pingable role to yourself for a specific puzzle.\n"
+                               f"`$add_role \"area\" \"puzzle\"`\n"
+                               f"The quotes are necessary.")
+        return
+
+    area = args[0]
+    puzzle = args[1]
+
+    if area not in puzzleAreas:
+        await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area. Valid areas are: \"Verdant Glen\", "
+                               f"\"Lucent Waters\", \"Autumn Falls\", \"Shady Wildwood\", and \"Serene Deluge\"."
+                               f"\nRemember to use the quotes.")
+        return
+
+    if puzzle not in acceptedPuzzles[area]:
+        await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area.\n"
+                               f"Valid areas for {area} are: {acceptedPuzzles[area]}\n"
+                               f"Remember to use double quotes around the puzzle name.")
+        return
+
+    # Check if the role already exists
+    try:
+        roleId = roleIds[area + " " + puzzle]
+        role = ctx.guild.get_role(roleId)
+        await ctx.author.add_roles(role)
+        await ctx.channel.send(f"Role Added! {ctx.author.mention}")
+        return
+    except KeyError:
+        pass
+
+    # If it doesn't exist, create it, add it to the user, and save its id
+    role = await ctx.guild.create_role(name=area + " " + puzzle)
+    roleId = role.id
+    await ctx.author.add_roles(role)
+    await ctx.channel.send(f"Role Added! {ctx.author.mention}")
+
+    roleIds.update({area + " " + puzzle: roleId})
+    with open("roles.json", "w") as write_file:
+        json.dump(roleIds, write_file)
 
 
 @tasks.loop(seconds=60.0)
