@@ -3,6 +3,7 @@ from discord.ext import tasks, commands
 import datetime
 import json
 import os
+from asyncio import sleep
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -10,6 +11,7 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 
 puzzleAreas = ["Verdant Glen", "Lucent Waters", "Autumn Falls", "Shady Wildwood", "Serene Deluge"]
 
+# TODO: This and puzzleTimes will need to be updated on release
 acceptedPuzzles = {
     "Verdant Glen": ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones", "Hidden Rings", "Hidden Cubes",
                      "Hidden Archways", "Hidden Pentads", "Logic Grids", "Memory Grids", "Pattern Grids",
@@ -126,12 +128,13 @@ with open("embedMessages.json", "r") as read_file:
 with open("roles.json", "r") as read_file:
     roleIds = json.load(read_file)
 
-# Dictionaries for containing the processed channels and embedMessages
+# Dictionaries for containing the processed channels and embed messages
 # These will be filled in the bot ready function
 channels = {}
 embedMessages = {}
 
 
+# Checks for commands
 @bot.check
 async def globally_block_non_IOI(ctx):  # Second one is for testing
     return ctx.guild.id == 1193697387827437598 or ctx.guild.id == 1205261316818731029
@@ -141,6 +144,7 @@ async def isAdmin(ctx):
     return ctx.author.id == 461268548229136395 or await bot.is_owner(ctx.author)
 
 
+# Commands for setting up the embed messages
 @bot.command()
 @commands.check(isAdmin)
 async def set_verdant_glen(ctx):
@@ -190,6 +194,7 @@ async def create_embed_timer(ctx, area):
         embedVar.add_field(name=puzzle, value=timeString, inline=True)
 
     # Fix weird spacing
+    # TODO: This will need to be changed on release
     if area == "Lucent Waters":
         embedVar.add_field(name="", value="", inline=True)
 
@@ -419,6 +424,7 @@ async def updateEmbeds():
 
         # Send the update
         await message.edit(embed=embed)
+        await sleep(3)  # Only here to avoid the rate limit warning clogging the console; completely unnecessary
 
 
 # When the bot is ready, start the main loop
