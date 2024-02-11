@@ -23,7 +23,7 @@ acceptedPuzzles = {
                      "Hidden Rings", "Hidden Pentads", "Logic Grids", "Memory Grids", "Pattern Grids",
                      "Flow Orbs", "Wandering Echos", "Glide Rings", "Morphic Fractals", "Crystal Labyrinths"],
 
-    "Shady Wildwood": ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones", "Hidden Cubes",  "Hidden Rings",
+    "Shady Wildwood": ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones", "Hidden Cubes", "Hidden Rings",
                        "Hidden Pentads", "Hidden Archways", "Logic Grids", "Memory Grids", "Pattern Grids",
                        "Wandering Echos", "Flow Orbs", "Glide Rings", "Crystal Labyrinths"],
 
@@ -316,6 +316,40 @@ async def remove_role(ctx, *args):
 
     except KeyError:
         await ctx.channel.send(f"That role doesn't exist. {ctx.author.mention}")
+
+
+@bot.command()
+async def help_me(ctx):
+    embedVar = discord.Embed(title="Help", color=0x336EFF)
+    messageContent = ("```I keep track of Islands of Insight puzzle timers!\n"
+                      "My commands:\n"
+                      "-- $add_role (type me in chat for how to use)\n"
+                      "-- $remove_role (type me in chat for how to use)\n"
+                      "If you have any suggestions to add to me, create a ticket to ask the server admins!\n"
+                      "If you find any bugs, message seasonsveil on Discord.```")
+    embedVar.add_field(name="", value=messageContent)
+    await ctx.channel.send(embed=embedVar)
+
+
+@bot.command()
+@commands.check(isAdmin)
+async def help_admin(ctx):
+    embedVar = discord.Embed(title="Help", color=0x336EFF)
+    messageContent = ("```My commands only work in the official test server and the IOI Fan Server.\n"
+                      "Also, my admin commands can only be done by seasonsveil or Epic."
+                      "If you want to add someone else to these permissions, ask seasonsveil.\n"
+                      "Admin commands:\n"
+                      "-- $set_verdant_glen\n"
+                      "-- $set_lucent_waters\n"
+                      "-- $set_autumn_falls\n"
+                      "-- $set_shady_wildwood\n"
+                      "-- $set_serene_deluge\n"
+                      "Note: There can only be 1 of each area's embed message at a time. If you make a new one, "
+                      "you probably want to delete the old one as it will no longer function.\n"
+                      "If you want to move a 'spam' channel, ask seasonsveil as it would be more work than "
+                      "it is worth to make that happen through commands.```")
+    embedVar.add_field(name="", value=messageContent)
+    await ctx.channel.send(embed=embedVar)
 
 
 @tasks.loop(seconds=60.0)
