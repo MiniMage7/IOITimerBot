@@ -186,12 +186,16 @@ async def set_serene_deluge(ctx):
     await create_embed_timer(ctx, "Serene Deluge")
 
 
+# Creates an embedded timer for an area
 async def create_embed_timer(ctx, area):
+    # Delete the message that called this function
     await ctx.message.delete()
 
+    # Create the embed message and get the current time
     embedVar = discord.Embed(title=area + " Timers", color=0x336EFF)
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
 
+    # For each puzzle, calculate the time left til update and add it to the embed
     for puzzle in acceptedPuzzles[area]:
         seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
                    - currentTime).seconds
@@ -204,15 +208,19 @@ async def create_embed_timer(ctx, area):
     if area == "Lucent Waters":
         embedVar.add_field(name="", value="", inline=True)
 
+    # Send the embedded message
     embeddedMessage = await ctx.channel.send(embed=embedVar)
 
+    # Get the embedded message's channel id and message id to retrieve it later
     embedMessageIds[area + " Channel"] = ctx.channel.id
     embedMessageIds[area] = embeddedMessage.id
 
+    # Save it to a json
     with open("embedMessages.json", "w") as write_file:
         json.dump(embedMessageIds, write_file)
 
 
+# Takes a number of seconds and converts it to number of hours and minutes away in XXh XXm format
 def convertSecondsToString(seconds):
     hours = seconds // 3600
     minutes = (seconds % 3600) // 60
@@ -225,8 +233,11 @@ def convertSecondsToString(seconds):
     return timeString
 
 
+# Adds the passed role to the user
+# If the role doesn't exist yet, create it
 @bot.command()
 async def add_role(ctx, *args):
+    # Make sure the correct number of arguments were passed
     if len(args) != 2:
         await ctx.channel.send(f"{ctx.author.mention}\n"
                                f"This command is used to add a pingable role to yourself for a specific puzzle.\n"
@@ -234,15 +245,18 @@ async def add_role(ctx, *args):
                                f"The quotes are necessary.")
         return
 
+    # Assign the arguments
     area = args[0]
     puzzle = args[1]
 
+    # Check that the area is valid
     if area not in puzzleAreas:
         await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area. Valid areas are: \"Verdant Glen\", "
                                f"\"Lucent Waters\", \"Autumn Falls\", \"Shady Wildwood\", and \"Serene Deluge\"."
                                f"\nRemember to use the quotes.")
         return
 
+    # Check that the puzzle is in the area
     if puzzle not in acceptedPuzzles[area]:
         await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area.\n"
                                f"Valid areas for {area} are: {acceptedPuzzles[area]}\n"
@@ -270,8 +284,11 @@ async def add_role(ctx, *args):
         json.dump(roleIds, write_file)
 
 
+# Removes a passed role from the user
+# If that user was the last user with the role, delete the role
 @bot.command()
 async def remove_role(ctx, *args):
+    # Make sure the correct number of arguments were passed
     if len(args) != 2:
         await ctx.channel.send(f"{ctx.author.mention}\n"
                                f"This command is used to remove a pingable role from yourself.\n"
@@ -279,29 +296,34 @@ async def remove_role(ctx, *args):
                                f"The quotes are necessary.")
         return
 
+    # Assign the arguments
     area = args[0]
     puzzle = args[1]
 
+    # Check that the area is valid
     if area not in puzzleAreas:
         await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area. Valid areas are: \"Verdant Glen\", "
                                f"\"Lucent Waters\", \"Autumn Falls\", \"Shady Wildwood\", and \"Serene Deluge\"."
                                f"\nRemember to use the quotes.")
         return
 
+    # Check that the puzzle is in that area
     if puzzle not in acceptedPuzzles[area]:
         await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area.\n"
                                f"Valid areas for {area} are: {acceptedPuzzles[area]}\n"
                                f"Remember to use double quotes around the puzzle name.")
         return
 
-    # Check if the role exists
+    # Make sure the role exists
     try:
         roleId = roleIds[area + " " + puzzle]
         role = ctx.guild.get_role(roleId)
         try:
+            # If it does, remove the role and continue past this try statement
             await ctx.author.remove_roles(role)
             await ctx.channel.send(f"Role Removed! {ctx.author.mention}")
         except discord.HTTPException:
+            # If it doesn't, print a message and exit
             await ctx.channel.send(f"Role remove failed. {ctx.author.mention}")
             return
 
@@ -318,6 +340,7 @@ async def remove_role(ctx, *args):
         await ctx.channel.send(f"That role doesn't exist. {ctx.author.mention}")
 
 
+# Sends generic help information to the chat
 @bot.command()
 async def help_me(ctx):
     embedVar = discord.Embed(title="Help", color=0x336EFF)
@@ -331,6 +354,7 @@ async def help_me(ctx):
     await ctx.channel.send(embed=embedVar)
 
 
+# Sends admin help information to the chat
 @bot.command()
 @commands.check(isAdmin)
 async def help_admin(ctx):
@@ -352,16 +376,22 @@ async def help_admin(ctx):
     await ctx.channel.send(embed=embedVar)
 
 
+# Main loop that updates everything
 @tasks.loop(seconds=60.0)
 async def checkTime():
     # Send messages for each ready puzzle
+    # Get the current time and store it as a string
     time = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
     timeString = "{:d}:{:02d}".format(time.hour, time.minute)
+
+    # For each area and each puzzle in that area
     for area in puzzleAreas:
+        # Get the channel to send the message
+        botChannel = bot.get_channel(channelIds[area])
         for puzzle in acceptedPuzzles[area]:
             currentPuzzle = area + " " + puzzle
+            # Check if it is time for this message to be sent
             if puzzleTimes[currentPuzzle] == timeString:
-                botChannel = bot.get_channel(channelIds[area])
                 # Check if there is anyone with the role to ping
                 try:
                     roleId = roleIds[area + " " + puzzle]
@@ -374,16 +404,21 @@ async def checkTime():
     await updateEmbeds()
 
 
+# Updates stored embedded messages
 async def updateEmbeds():
+    # Get the current time
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
 
+    # For each area
     for area in puzzleAreas:
+        # Get the embedded message
         channel = bot.get_channel(embedMessageIds[area + " Channel"])
         message = await channel.fetch_message(embedMessageIds[area])
         embed = message.embeds[0]
 
         index = 0
 
+        # Update each puzzle in the message
         for puzzle in acceptedPuzzles[area]:
             seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
                        - currentTime).seconds
@@ -394,9 +429,11 @@ async def updateEmbeds():
 
             index += 1
 
+        # Send the update
         await message.edit(embed=embed)
 
 
+# When the bot is ready, start the main loop
 @bot.event
 async def on_ready():
     checkTime.start()
