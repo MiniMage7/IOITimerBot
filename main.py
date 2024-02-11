@@ -270,6 +270,54 @@ async def add_role(ctx, *args):
         json.dump(roleIds, write_file)
 
 
+@bot.command()
+async def remove_role(ctx, *args):
+    if len(args) != 2:
+        await ctx.channel.send(f"{ctx.author.mention}\n"
+                               f"This command is used to remove a pingable role from yourself.\n"
+                               f"`$remove_role \"area\" \"puzzle\"`\n"
+                               f"The quotes are necessary.")
+        return
+
+    area = args[0]
+    puzzle = args[1]
+
+    if area not in puzzleAreas:
+        await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area. Valid areas are: \"Verdant Glen\", "
+                               f"\"Lucent Waters\", \"Autumn Falls\", \"Shady Wildwood\", and \"Serene Deluge\"."
+                               f"\nRemember to use the quotes.")
+        return
+
+    if puzzle not in acceptedPuzzles[area]:
+        await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area.\n"
+                               f"Valid areas for {area} are: {acceptedPuzzles[area]}\n"
+                               f"Remember to use double quotes around the puzzle name.")
+        return
+
+    # Check if the role exists
+    try:
+        roleId = roleIds[area + " " + puzzle]
+        role = ctx.guild.get_role(roleId)
+        try:
+            await ctx.author.remove_roles(role)
+            await ctx.channel.send(f"Role Removed! {ctx.author.mention}")
+        except discord.HTTPException:
+            await ctx.channel.send(f"Role remove failed. {ctx.author.mention}")
+            return
+
+        # If that was the last user with the role, delete the role
+        if len(role.members) == 0:
+            await role.delete()
+
+            # and remove it from the json / dictionary
+            del roleIds[area + " " + puzzle]
+            with open("roles.json", "w") as write_file:
+                json.dump(roleIds, write_file)
+
+    except KeyError:
+        await ctx.channel.send(f"That role doesn't exist. {ctx.author.mention}")
+
+
 @tasks.loop(seconds=60.0)
 async def checkTime():
     # Send messages for each ready puzzle
