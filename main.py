@@ -116,6 +116,7 @@ puzzleTimes = {
     "Serene Deluge Crystal Labyrinths": "4:05"
 }
 
+# Read all the json files for initialization information
 with open("channels.json", "r") as read_file:
     channelIds = json.load(read_file)
 
@@ -124,6 +125,11 @@ with open("embedMessages.json", "r") as read_file:
 
 with open("roles.json", "r") as read_file:
     roleIds = json.load(read_file)
+
+# Dictionaries for containing the processed channels and embedMessages
+# These will be filled in the bot ready function
+channels = {}
+embedMessages = {}
 
 
 @bot.check
@@ -193,6 +199,10 @@ async def create_embed_timer(ctx, area):
     # Get the embedded message's channel id and message id to retrieve it later
     embedMessageIds[area + " Channel"] = ctx.channel.id
     embedMessageIds[area] = embeddedMessage.id
+
+    # Update the embedMessages dictionary too
+    channel = bot.get_channel(embedMessageIds[area + " Channel"])
+    embedMessages[area] = await channel.fetch_message(embedMessageIds[area])
 
     # Save it to a json
     with open("embedMessages.json", "w") as write_file:
@@ -366,7 +376,7 @@ async def checkTime():
     # For each area and each puzzle in that area
     for area in puzzleAreas:
         # Get the channel to send the message
-        botChannel = bot.get_channel(channelIds[area])
+        botChannel = channels[area]
         for puzzle in acceptedPuzzles[area]:
             currentPuzzle = area + " " + puzzle
             # Check if it is time for this message to be sent
@@ -391,8 +401,7 @@ async def updateEmbeds():
     # For each area
     for area in puzzleAreas:
         # Get the embedded message
-        channel = bot.get_channel(embedMessageIds[area + " Channel"])
-        message = await channel.fetch_message(embedMessageIds[area])
+        message = embedMessages[area]
         embed = message.embeds[0]
 
         index = 0
@@ -415,6 +424,16 @@ async def updateEmbeds():
 # When the bot is ready, start the main loop
 @bot.event
 async def on_ready():
+    # Convert the channels and embed message ids into actual objects
+    # The channels will only ever be defined here, so if you change the channel json,
+    # you'll have to rerun the program for the changes to come into effect
+    # The embed messages can be changed through the set commands
+    for area in puzzleAreas:
+        channels.update({area: bot.get_channel(channelIds[area])})
+
+        channel = bot.get_channel(embedMessageIds[area + " Channel"])
+        embedMessages.update({area: await channel.fetch_message(embedMessageIds[area])})
+
     checkTime.start()
 
 
