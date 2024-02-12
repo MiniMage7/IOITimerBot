@@ -141,7 +141,7 @@ async def globally_block_non_IOI(ctx):  # Second one is for testing
 
 
 async def isAdmin(ctx):
-    return ctx.author.id == 461268548229136395 or await bot.is_owner(ctx.author)
+    return ctx.author.guild_permissions.administrator or await bot.is_owner(ctx.author)
 
 
 # Commands for setting up the embed messages
@@ -354,8 +354,7 @@ async def help_me(ctx):
 async def help_admin(ctx):
     embedVar = discord.Embed(title="Help", color=0x336EFF)
     messageContent = ("```My commands only work in the official test server and the IOI Fan Server.\n"
-                      "Also, my admin commands can only be done by seasonsveil or Epic."
-                      "If you want to add someone else to these permissions, ask seasonsveil.\n"
+                      "The following commands can only be used by people with administrator permissions.\n"
                       "Admin commands:\n"
                       "-- $set_verdant_glen\n"
                       "-- $set_lucent_waters\n"
