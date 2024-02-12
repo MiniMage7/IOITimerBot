@@ -236,7 +236,7 @@ async def add_role(ctx, *args):
         await ctx.channel.send(f"{ctx.author.mention}\n"
                                f"This command is used to add a pingable role to yourself for a specific puzzle.\n"
                                f"`$add_role \"area\" \"puzzle\"`\n"
-                               f"The quotes are necessary.")
+                               f"The quotes and capitalization are necessary.")
         return
 
     # Assign the arguments
@@ -247,14 +247,14 @@ async def add_role(ctx, *args):
     if area not in puzzleAreas:
         await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area. Valid areas are: \"Verdant Glen\", "
                                f"\"Lucent Waters\", \"Autumn Falls\", \"Shady Wildwood\", and \"Serene Deluge\"."
-                               f"\nRemember to use the quotes.")
+                               f"\nRemember quotes and capitalization.")
         return
 
     # Check that the puzzle is in the area
     if puzzle not in acceptedPuzzles[area]:
         await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area.\n"
                                f"Valid areas for {area} are: {acceptedPuzzles[area]}\n"
-                               f"Remember to use double quotes around the puzzle name.")
+                               f"Remember to use double quotes and capitalization.")
         return
 
     # Check if the role already exists
@@ -287,7 +287,7 @@ async def remove_role(ctx, *args):
         await ctx.channel.send(f"{ctx.author.mention}\n"
                                f"This command is used to remove a pingable role from yourself.\n"
                                f"`$remove_role \"area\" \"puzzle\"`\n"
-                               f"The quotes are necessary.")
+                               f"Quotes and capitalization are necessary.")
         return
 
     # Assign the arguments
@@ -298,14 +298,14 @@ async def remove_role(ctx, *args):
     if area not in puzzleAreas:
         await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area. Valid areas are: \"Verdant Glen\", "
                                f"\"Lucent Waters\", \"Autumn Falls\", \"Shady Wildwood\", and \"Serene Deluge\"."
-                               f"\nRemember to use the quotes.")
+                               f"\nRemember to use double quotes and capitalization.")
         return
 
     # Check that the puzzle is in that area
     if puzzle not in acceptedPuzzles[area]:
         await ctx.channel.send(f"{ctx.author.mention}\nThat is not a valid area.\n"
                                f"Valid areas for {area} are: {acceptedPuzzles[area]}\n"
-                               f"Remember to use double quotes around the puzzle name.")
+                               f"Remember to use double quotes and capitalization.")
         return
 
     # Make sure the role exists
