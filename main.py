@@ -36,86 +36,86 @@ acceptedPuzzles = {
 
 # Times are UTC - 6
 puzzleTimes = {
-    "Verdant Glen Matchboxes": "7:30",
-    "Verdant Glen Light Motifs": "20:18",
-    "Verdant Glen Sightseers": "16:26",
-    "Verdant Glen Sentinel Stones": "20:07",
-    "Verdant Glen Hidden Rings": "9:48",
-    "Verdant Glen Hidden Cubes": "20:53",
-    "Verdant Glen Hidden Archways": "7:22",
-    "Verdant Glen Hidden Pentads": "13:13",
-    "Verdant Glen Logic Grids": "5:18",
-    "Verdant Glen Memory Grids": "13:35",
-    "Verdant Glen Pattern Grids": "10:13",
-    "Verdant Glen Wandering Echos": "12:06",
-    "Verdant Glen Glide Rings": "5:53",
-    "Verdant Glen Flow Orbs": "23:33",
-    "Verdant Glen Crystal Labyrinths": "5:28",
-    "Verdant Glen Morphic Fractals": "9:56",
+    "Verdant Glen Matchboxes": "7:29:18",
+    "Verdant Glen Light Motifs": "21:17:55",
+    "Verdant Glen Sightseers": "17:25:11",
+    "Verdant Glen Sentinel Stones": "20:06:03",
+    "Verdant Glen Hidden Rings": "9:47:04",
+    "Verdant Glen Hidden Cubes": "20:52:52",
+    "Verdant Glen Hidden Archways": "7:21:13",
+    "Verdant Glen Hidden Pentads": "13:12:52",
+    "Verdant Glen Logic Grids": "5:17:06",
+    "Verdant Glen Memory Grids": "13:34:42",
+    "Verdant Glen Pattern Grids": "10:12:33",
+    "Verdant Glen Wandering Echos": "12:05:38",
+    "Verdant Glen Glide Rings": "5:52:48",
+    "Verdant Glen Flow Orbs": "23:33:00",
+    "Verdant Glen Crystal Labyrinths": "5:27:53",
+    "Verdant Glen Morphic Fractals": "9:55:51",
 
-    "Lucent Waters Sightseers": "6:44",
-    "Lucent Waters Matchboxes": "21:48",
-    "Lucent Waters Light Motifs": "10:37",
-    "Lucent Waters Hidden Cubes": "11:12",
-    "Lucent Waters Hidden Archways": "21:40",
-    "Lucent Waters Hidden Rings": "0:06",
-    "Lucent Waters Hidden Pentads": "3:32",
-    "Lucent Waters Logic Grids": "19:36",
-    "Lucent Waters Pattern Grids": "0:31",
-    "Lucent Waters Memory Grids": "3:53",
-    "Lucent Waters Wandering Echos": "2:24",
-    "Lucent Waters Glide Rings": "20:12",
-    "Lucent Waters Flow Orbs": "13:52",
-    "Lucent Waters Morphic Fractals": "0:15",
+    "Lucent Waters Sightseers": "6:44:23",
+    "Lucent Waters Matchboxes": "21:48:32",
+    "Lucent Waters Light Motifs": "10:37:06",
+    "Lucent Waters Hidden Cubes": "11:12:05",
+    "Lucent Waters Hidden Archways": "21:40:27",
+    "Lucent Waters Hidden Rings": "0:06:17",
+    "Lucent Waters Hidden Pentads": "3:32:06",
+    "Lucent Waters Logic Grids": "19:36:18",
+    "Lucent Waters Pattern Grids": "0:31:47",
+    "Lucent Waters Memory Grids": "3:53:55",
+    "Lucent Waters Wandering Echos": "2:24:51",
+    "Lucent Waters Glide Rings": "20:12:01",
+    "Lucent Waters Flow Orbs": "13:52:13",
+    "Lucent Waters Morphic Fractals": "0:15:05",
 
-    "Autumn Falls Matchboxes": "12:37",
-    "Autumn Falls Sightseers": "21:33",
-    "Autumn Falls Light Motifs": "1:25",
-    "Autumn Falls Sentinel Stones": "1:14",
-    "Autumn Falls Hidden Cubes": "2:00",
-    "Autumn Falls Hidden Archways": "12:29",
-    "Autumn Falls Hidden Rings": "14:55",
-    "Autumn Falls Hidden Pentads": "19:20",
-    "Autumn Falls Logic Grids": "10:25",
-    "Autumn Falls Memory Grids": "18:42",
-    "Autumn Falls Pattern Grids": "15:20",
-    "Autumn Falls Flow Orbs": "4:40",
-    "Autumn Falls Wandering Echos": "17:13",
-    "Autumn Falls Glide Rings": "11:00",
-    "Autumn Falls Morphic Fractals": "15:03",
-    "Autumn Falls Crystal Labyrinths": "10:35",
+    "Autumn Falls Matchboxes": "12:37:15",
+    "Autumn Falls Sightseers": "21:33:08",
+    "Autumn Falls Light Motifs": "1:25:51",
+    "Autumn Falls Sentinel Stones": "1:13:00",
+    "Autumn Falls Hidden Cubes": "2:00:49",
+    "Autumn Falls Hidden Archways": "12:29:11",
+    "Autumn Falls Hidden Rings": "14:55:01",
+    "Autumn Falls Hidden Pentads": "18:20:49",
+    "Autumn Falls Logic Grids": "10:25:02",
+    "Autumn Falls Memory Grids": "18:42:39",
+    "Autumn Falls Pattern Grids": "15:20:30",
+    "Autumn Falls Flow Orbs": "4:40:58",
+    "Autumn Falls Wandering Echos": "17:13:35",
+    "Autumn Falls Glide Rings": "11:00:44",
+    "Autumn Falls Morphic Fractals": "15:03:48",
+    "Autumn Falls Crystal Labyrinths": "10:35:49",
 
-    "Shady Wildwood Matchboxes": "14:13",
-    "Shady Wildwood Light Motifs": "3:02",
-    "Shady Wildwood Sightseers": "23:09",
-    "Shady Wildwood Sentinel Stones": "2:50",
-    "Shady Wildwood Hidden Cubes": "3:36",
-    "Shady Wildwood Hidden Rings": "16:31",
-    "Shady Wildwood Hidden Pentads": "19:56",
-    "Shady Wildwood Hidden Archways": "14:05",
-    "Shady Wildwood Logic Grids": "12:01",
-    "Shady Wildwood Memory Grids": "20:18",
-    "Shady Wildwood Pattern Grids": "16:56",
-    "Shady Wildwood Wandering Echos": "18:49",
-    "Shady Wildwood Flow Orbs": "6:17",
-    "Shady Wildwood Glide Rings": "12:36",
-    "Shady Wildwood Crystal Labyrinths": "12:11",
+    "Shady Wildwood Matchboxes": "14:13:24",
+    "Shady Wildwood Light Motifs": "3:02:00",
+    "Shady Wildwood Sightseers": "23:09:17",
+    "Shady Wildwood Sentinel Stones": "2:50:09",
+    "Shady Wildwood Hidden Cubes": "3:36:58",
+    "Shady Wildwood Hidden Rings": "16:31:10",
+    "Shady Wildwood Hidden Pentads": "19:56:58",
+    "Shady Wildwood Hidden Archways": "14:05:20",
+    "Shady Wildwood Logic Grids": "12:01:11",
+    "Shady Wildwood Memory Grids": "20:18:48",
+    "Shady Wildwood Pattern Grids": "16:56:39",
+    "Shady Wildwood Wandering Echos": "18:49:44",
+    "Shady Wildwood Flow Orbs": "6:17:05",
+    "Shady Wildwood Glide Rings": "12:36:53",
+    "Shady Wildwood Crystal Labyrinths": "12:11:58",
 
-    "Serene Deluge Light Motifs": "18:55",
-    "Serene Deluge Matchboxes": "6:06",
-    "Serene Deluge Sightseers": "15:03",
-    "Serene Deluge Sentinel Stones": "18:43",
-    "Serene Deluge Hidden Pentads": "11:50",
-    "Serene Deluge Hidden Cubes": "19:30",
-    "Serene Deluge Hidden Rings": "8:24",
-    "Serene Deluge Hidden Archways": "5:59",
-    "Serene Deluge Logic Grids": "3:54",
-    "Serene Deluge Memory Grids": "12:12",
-    "Serene Deluge Pattern Grids": "8:50",
-    "Serene Deluge Flow Orbs": "22:10",
-    "Serene Deluge Glide Rings": "4:30",
-    "Serene Deluge Wandering Echos": "10:43",
-    "Serene Deluge Crystal Labyrinths": "4:05"
+    "Serene Deluge Light Motifs": "18:55:43",
+    "Serene Deluge Matchboxes": "6:07:08",
+    "Serene Deluge Sightseers": "15:03:00",
+    "Serene Deluge Sentinel Stones": "18:43:53",
+    "Serene Deluge Hidden Pentads": "11:50:42",
+    "Serene Deluge Hidden Cubes": "19:30:42",
+    "Serene Deluge Hidden Rings": "8:24:53",
+    "Serene Deluge Hidden Archways": "5:59:04",
+    "Serene Deluge Logic Grids": "3:54:55",
+    "Serene Deluge Memory Grids": "12:12:32",
+    "Serene Deluge Pattern Grids": "8:50:23",
+    "Serene Deluge Flow Orbs": "22:10:50",
+    "Serene Deluge Glide Rings": "4:30:36",
+    "Serene Deluge Wandering Echos": "10:43:27",
+    "Serene Deluge Crystal Labyrinths": "4:05:42"
 }
 
 # Read all the json files for initialization information
@@ -186,7 +186,7 @@ async def create_embed_timer(ctx, area):
 
     # For each puzzle, calculate the time left til update and add it to the embed
     for puzzle in acceptedPuzzles[area]:
-        seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
+        seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M:%S')
                    - currentTime).seconds
 
         timeString = convertSecondsToString(seconds)
@@ -369,7 +369,7 @@ async def help_admin(ctx):
     await ctx.channel.send(embed=embedVar)
 
 
-# Main loop that updates everything
+# Loop that checks to send out refresh messages
 @tasks.loop(seconds=60.0)
 async def checkTime():
     # Send messages for each ready puzzle
@@ -384,7 +384,7 @@ async def checkTime():
         for puzzle in acceptedPuzzles[area]:
             currentPuzzle = area + " " + puzzle
             # Check if it is time for this message to be sent
-            if puzzleTimes[currentPuzzle] == timeString:
+            if puzzleTimes[currentPuzzle][:-3] == timeString: # TODO: Check to make sure this works for midnight to 1 am
                 # Check if there is anyone with the role to ping
                 try:
                     roleId = roleIds[area + " " + puzzle]
@@ -393,11 +393,9 @@ async def checkTime():
                 except KeyError:
                     await botChannel.send(currentPuzzle + " have refreshed!")
 
-    # Update each embedded message
-    await updateEmbeds()
-
 
 # Updates stored embedded messages
+@tasks.loop(seconds=30.0)
 async def updateEmbeds():
     # Get the current time
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
@@ -412,7 +410,7 @@ async def updateEmbeds():
 
         # Update each puzzle in the message
         for puzzle in acceptedPuzzles[area]:
-            seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M')
+            seconds = (datetime.datetime.strptime(puzzleTimes[area + " " + puzzle], '%H:%M:%S')
                        - currentTime).seconds
 
             timeString = convertSecondsToString(seconds)
@@ -439,6 +437,8 @@ async def on_ready():
         channel = bot.get_channel(embedMessageIds[area + " Channel"])
         embedMessages.update({area: await channel.fetch_message(embedMessageIds[area])})
 
+    updateEmbeds.start()
+    await sleep(20)
     checkTime.start()
 
 
