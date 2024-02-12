@@ -396,7 +396,7 @@ async def checkTime():
 
 
 # Updates stored embedded messages
-@tasks.loop(seconds=20.0)
+@tasks.loop(seconds=30.0)
 async def updateEmbeds():
     # Get the current time
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
@@ -439,7 +439,7 @@ async def on_ready():
         embedMessages.update({area: await channel.fetch_message(embedMessageIds[area])})
 
     updateEmbeds.start()
-    await sleep(16)
+    await sleep(20)
     checkTime.start()
 
 
