@@ -384,7 +384,7 @@ async def checkTime():
         for puzzle in acceptedPuzzles[area]:
             currentPuzzle = area + " " + puzzle
             # Check if it is time for this message to be sent
-            if puzzleTimes[currentPuzzle][:-3] == timeString: # TODO: Check to make sure this works for midnight to 1 am
+            if puzzleTimes[currentPuzzle][:-3] == timeString:  # TODO: Check to make sure this works for midnight to 1
                 # Check if there is anyone with the role to ping
                 try:
                     roleId = roleIds[area + " " + puzzle]
@@ -421,7 +421,7 @@ async def updateEmbeds():
 
         # Send the update
         await message.edit(embed=embed)
-        await sleep(3)  # Only here to avoid the rate limit warning clogging the console; completely unnecessary
+        await sleep(3.5)  # Only here to avoid the rate limit warning clogging the console; completely unnecessary
 
 
 # When the bot is ready, start the main loop
