@@ -2,7 +2,7 @@
 #### Discord bot that keeps track and notifies users when puzzles refresh
 
 ## Important Information
-A few things of the bot are hard coded. The bot will only currently function in the IOI fan server and a test server. The channels that the bot sends it "Puzzle has refreshed!" are set whenever the bot starts from channels.json. The roles.json and embedMessages.json store the pingable role ids and embed messages so that if the bot turns off, all the information is stored and it can restart without any issues. You should never have to mess with these.
+A few things of the bot are hard coded. The bot will only currently function in the IOI fan server and a test server. The channels that the bot sends it "Puzzle has refreshed!" are set whenever the bot starts from channels.json. The roles.json and embedMessages.json store the pingable role ids and embed messages so that if the bot turns off, all the information is stored, and it can restart without any issues. You should never have to mess with these.
 
 ## Normal Commands
 
