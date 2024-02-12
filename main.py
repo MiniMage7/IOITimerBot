@@ -370,7 +370,7 @@ async def help_admin(ctx):
     await ctx.channel.send(embed=embedVar)
 
 
-# Main loop that updates everything
+# Loop that checks to send out refresh messages
 @tasks.loop(seconds=60.0)
 async def checkTime():
     # Send messages for each ready puzzle
@@ -394,11 +394,9 @@ async def checkTime():
                 except KeyError:
                     await botChannel.send(currentPuzzle + " have refreshed!")
 
-    # Update each embedded message
-    await updateEmbeds()
-
 
 # Updates stored embedded messages
+@tasks.loop(seconds=20.0)
 async def updateEmbeds():
     # Get the current time
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
@@ -440,6 +438,8 @@ async def on_ready():
         channel = bot.get_channel(embedMessageIds[area + " Channel"])
         embedMessages.update({area: await channel.fetch_message(embedMessageIds[area])})
 
+    updateEmbeds.start()
+    await sleep(16)
     checkTime.start()
 
 
