@@ -421,7 +421,7 @@ async def updateEmbeds():
 
         # Send the update
         await message.edit(embed=embed)
-        await sleep(3.5)  # Only here to avoid the rate limit warning clogging the console; completely unnecessary
+        await sleep(4)  # Only here to avoid the rate limit warning clogging the console; completely unnecessary
 
 
 # When the bot is ready, start the main loop
@@ -438,7 +438,7 @@ async def on_ready():
         embedMessages.update({area: await channel.fetch_message(embedMessageIds[area])})
 
     updateEmbeds.start()
-    await sleep(20)
+    await sleep(23)
     checkTime.start()
 
 
