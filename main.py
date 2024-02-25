@@ -11,34 +11,38 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 
 puzzleAreas = ["Verdant Glen", "Lucent Waters", "Autumn Falls", "Shady Wildwood", "Serene Deluge"]
 
-# TODO: This and puzzleTimes will need to be updated on release
 acceptedPuzzles = {
     "Verdant Glen": ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones", "Hidden Rings", "Hidden Cubes",
                      "Hidden Archways", "Hidden Pentads", "Logic Grids", "Memory Grids", "Pattern Grids",
-                     "Wandering Echos", "Glide Rings", "Flow Orbs", "Crystal Labyrinths", "Morphic Fractals"],
+                     "Wandering Echos", "Glide Rings", "Flow Orbs", "Crystal Labyrinths", "Morphic Fractals",
+                     "Match Threes"],
 
     "Lucent Waters": ["Sightseers", "Matchboxes", "Light Motifs", "Hidden Cubes", "Hidden Archways", "Hidden Rings",
-                      "Hidden Pentads", "Logic Grids", "Pattern Grids", "Memory Grids",
-                      "Wandering Echos", "Glide Rings", "Flow Orbs", "Morphic Fractals"],
+                      "Hidden Pentads", "Logic Grids", "Pattern Grids", "Memory Grids", "Music Grids",
+                      "Wandering Echos", "Glide Rings", "Flow Orbs", "Match Threes", "Phasic Dials",
+                      "Morphic Fractals"],
 
     "Autumn Falls": ["Matchboxes", "Sightseers", "Light Motifs", "Sentinel Stones", "Hidden Cubes", "Hidden Archways",
-                     "Hidden Rings", "Hidden Pentads", "Logic Grids", "Memory Grids", "Pattern Grids",
-                     "Flow Orbs", "Wandering Echos", "Glide Rings", "Morphic Fractals", "Crystal Labyrinths"],
+                     "Hidden Rings", "Hidden Pentads", "Logic Grids", "Music Grids", "Memory Grids", "Pattern Grids",
+                     "Flow Orbs", "Wandering Echos", "Glide Rings", "Rolling Blocks", "Match Threes", "Phasic Dials",
+                     "Shifting Mosaics", "Crystal Labyrinths", "Morphic Fractals"],
 
     "Shady Wildwood": ["Matchboxes", "Light Motifs", "Sightseers", "Sentinel Stones", "Hidden Cubes", "Hidden Rings",
-                       "Hidden Pentads", "Hidden Archways", "Logic Grids", "Memory Grids", "Pattern Grids",
-                       "Wandering Echos", "Flow Orbs", "Glide Rings", "Crystal Labyrinths"],
+                       "Hidden Pentads", "Hidden Archways", "Logic Grids", "Memory Grids", "Music Grids",
+                       "Pattern Grids", "Wandering Echos", "Flow Orbs", "Glide Rings", "Rolling Blocks",
+                       "Shifting Mosaics", "Phasic Dials", "Shy Auras", "Crystal Labyrinths"],
 
     "Serene Deluge": ["Light Motifs", "Matchboxes", "Sightseers", "Sentinel Stones", "Hidden Pentads", "Hidden Cubes",
-                      "Hidden Rings", "Hidden Archways", "Logic Grids", "Memory Grids", "Pattern Grids",
-                      "Flow Orbs", "Glide Rings", "Wandering Echos", "Crystal Labyrinths"]
+                      "Hidden Rings", "Hidden Archways", "Logic Grids", "Music Grids", "Memory Grids", "Pattern Grids",
+                      "Flow Orbs", "Glide Rings", "Wandering Echos", "Shifting Mosaics", "Rolling Blocks",
+                      "Phasic Dials", "Shy Auras", "Crystal Labyrinths"]
 }
 
 # Times are UTC - 6
 puzzleTimes = {
     "Verdant Glen Matchboxes": "7:29:18",
     "Verdant Glen Light Motifs": "21:17:55",
-    "Verdant Glen Sightseers": "17:25:11",
+    "Verdant Glen Sightseers": "16:25:11",
     "Verdant Glen Sentinel Stones": "20:06:03",
     "Verdant Glen Hidden Rings": "9:47:04",
     "Verdant Glen Hidden Cubes": "20:52:52",
@@ -52,6 +56,7 @@ puzzleTimes = {
     "Verdant Glen Flow Orbs": "23:33:00",
     "Verdant Glen Crystal Labyrinths": "5:27:53",
     "Verdant Glen Morphic Fractals": "9:55:51",
+    "Verdant Glen Match Threes": "19:16:17",
 
     "Lucent Waters Sightseers": "6:44:23",
     "Lucent Waters Matchboxes": "21:48:32",
@@ -63,9 +68,12 @@ puzzleTimes = {
     "Lucent Waters Logic Grids": "19:36:18",
     "Lucent Waters Pattern Grids": "0:31:47",
     "Lucent Waters Memory Grids": "3:53:55",
+    "Lucent Waters Music Grids": "10:57:02",
     "Lucent Waters Wandering Echos": "2:24:51",
     "Lucent Waters Glide Rings": "20:12:01",
     "Lucent Waters Flow Orbs": "13:52:13",
+    "Lucent Waters Match Threes": "9:35:29",
+    "Lucent Waters Phasic Dials": "0:15:22",
     "Lucent Waters Morphic Fractals": "0:15:05",
 
     "Autumn Falls Matchboxes": "12:37:15",
@@ -77,13 +85,18 @@ puzzleTimes = {
     "Autumn Falls Hidden Rings": "14:55:01",
     "Autumn Falls Hidden Pentads": "18:20:49",
     "Autumn Falls Logic Grids": "10:25:02",
+    "Autumn Falls Music Grids": "1:45:47",
     "Autumn Falls Memory Grids": "18:42:39",
     "Autumn Falls Pattern Grids": "15:20:30",
     "Autumn Falls Flow Orbs": "4:40:58",
     "Autumn Falls Wandering Echos": "17:13:35",
     "Autumn Falls Glide Rings": "11:00:44",
-    "Autumn Falls Morphic Fractals": "15:03:48",
+    "Autumn Falls Rolling Blocks": "6:19:38",
+    "Autumn Falls Match Threes": "0:24:14",
+    "Autumn Falls Phasic Dials": "15:04:05",
+    "Autumn Falls Shifting Mosaics": "6:36:21",
     "Autumn Falls Crystal Labyrinths": "10:35:49",
+    "Autumn Falls Morphic Fractals": "15:03:48",
 
     "Shady Wildwood Matchboxes": "14:13:24",
     "Shady Wildwood Light Motifs": "3:02:00",
@@ -95,10 +108,15 @@ puzzleTimes = {
     "Shady Wildwood Hidden Archways": "14:05:20",
     "Shady Wildwood Logic Grids": "12:01:11",
     "Shady Wildwood Memory Grids": "20:18:48",
+    "Shady Wildwood Music Grids": "3:21:56",
     "Shady Wildwood Pattern Grids": "16:56:39",
     "Shady Wildwood Wandering Echos": "18:49:44",
     "Shady Wildwood Flow Orbs": "6:17:05",
     "Shady Wildwood Glide Rings": "12:36:53",
+    "Shady Wildwood Rolling Blocks": "7:55:46",
+    "Shady Wildwood Shifting Mosaics": "8:12:30",
+    "Shady Wildwood Phasic Dials": "16:40:14",
+    "Shady Wildwood Shy Auras": "8:24:46",
     "Shady Wildwood Crystal Labyrinths": "12:11:58",
 
     "Serene Deluge Light Motifs": "18:55:43",
@@ -110,11 +128,16 @@ puzzleTimes = {
     "Serene Deluge Hidden Rings": "8:24:53",
     "Serene Deluge Hidden Archways": "5:59:04",
     "Serene Deluge Logic Grids": "3:54:55",
+    "Serene Deluge Music Grids": "19:15:39",
     "Serene Deluge Memory Grids": "12:12:32",
     "Serene Deluge Pattern Grids": "8:50:23",
     "Serene Deluge Flow Orbs": "22:10:50",
     "Serene Deluge Glide Rings": "4:30:36",
     "Serene Deluge Wandering Echos": "10:43:27",
+    "Serene Deluge Shifting Mosaics": "0:06:15",
+    "Serene Deluge Rolling Blocks": "23:49:31",
+    "Serene Deluge Phasic Dials": "8:33:58",
+    "Serene Deluge Shy Auras": "0:18:30",
     "Serene Deluge Crystal Labyrinths": "4:05:42"
 }
 
@@ -194,8 +217,7 @@ async def create_embed_timer(ctx, area):
         embedVar.add_field(name=puzzle, value=timeString, inline=True)
 
     # Fix weird spacing
-    # TODO: This will need to be changed on release
-    if area == "Lucent Waters":
+    if area != "Autumn Falls":
         embedVar.add_field(name="", value="", inline=True)
 
     # Send the embedded message
@@ -384,7 +406,7 @@ async def checkTime():
         for puzzle in acceptedPuzzles[area]:
             currentPuzzle = area + " " + puzzle
             # Check if it is time for this message to be sent
-            if puzzleTimes[currentPuzzle][:-3] == timeString:  # TODO: Check to make sure this works for midnight to 1
+            if puzzleTimes[currentPuzzle][:-3] == timeString:
                 # Check if there is anyone with the role to ping
                 try:
                     roleId = roleIds[area + " " + puzzle]
@@ -421,7 +443,7 @@ async def updateEmbeds():
 
         # Send the update
         await message.edit(embed=embed)
-        await sleep(4)  # Only here to avoid the rate limit warning clogging the console; completely unnecessary
+        await sleep(5)  # Only here to avoid the rate limit warning clogging the console; completely unnecessary
 
 
 # When the bot is ready, start the main loop
@@ -438,7 +460,7 @@ async def on_ready():
         embedMessages.update({area: await channel.fetch_message(embedMessageIds[area])})
 
     updateEmbeds.start()
-    await sleep(23)
+    await sleep(25)
     checkTime.start()
 
 
