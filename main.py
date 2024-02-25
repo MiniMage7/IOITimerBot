@@ -415,9 +415,10 @@ async def checkTime():
                 except KeyError:
                     await botChannel.send(currentPuzzle + " have refreshed!")
 
+    await updateEmbeds()
+
 
 # Updates stored embedded messages
-@tasks.loop(seconds=30.0)
 async def updateEmbeds():
     # Get the current time
     currentTime = datetime.datetime.utcnow() - datetime.timedelta(hours=6)
@@ -443,7 +444,7 @@ async def updateEmbeds():
 
         # Send the update
         await message.edit(embed=embed)
-        await sleep(5)  # Only here to avoid the rate limit warning clogging the console; completely unnecessary
+        await sleep(6)  # Only here to avoid the rate limit warning clogging the console; completely unnecessary
 
 
 # When the bot is ready, start the main loop
@@ -459,8 +460,6 @@ async def on_ready():
         channel = bot.get_channel(embedMessageIds[area + " Channel"])
         embedMessages.update({area: await channel.fetch_message(embedMessageIds[area])})
 
-    updateEmbeds.start()
-    await sleep(25)
     checkTime.start()
 
 
